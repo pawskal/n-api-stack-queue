@@ -1,0 +1,30 @@
+{
+  "name": "cpp-example",
+  "version": "0.0.0",
+  "description": "example usinf of n-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bindings": "^1.4.0",
+    "node-addon-api": "^1.6.2"
+  },
+  "gypfile": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pawskal/n-api-stack-queue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pawskal/n-api-stack-queue/issues"
+  },
+  "homepage": "https://github.com/pawskal/n-api-stack-queue#readme"
+}
