@@ -1,4 +1,5 @@
-#include <napi.h>
+// #include <napi.h>
+#include "napiQueue/napiQueue.cpp"
 
 Napi::String hello(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
@@ -21,7 +22,8 @@ Napi::Number multiply(const Napi::CallbackInfo& info) {
 Napi::Object init(Napi::Env env, Napi::Object exports) {
     exports.Set(Napi::String::New(env, "hello"), Napi::Function::New(env, hello));
     exports.Set(Napi::String::New(env, "multiply"), Napi::Function::New(env, multiply));
-    return exports;
+    return NapiQueue::Init(env, exports);
+    // return exports;
 };
 
 NODE_API_MODULE(nApiStackQueue, init);
