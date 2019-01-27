@@ -1,11 +1,12 @@
 {
   "name": "cpp-example",
   "version": "0.0.0",
-  "description": "example usinf of n-api",
+  "description": "example using of n-api",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "node-gyp rebuild"
+    "build": "node-gyp rebuild",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
