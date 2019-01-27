@@ -1,6 +1,5 @@
-const modBind = require('bindings')('n-api-stack-queue')
-const modNode = require('./build/Release/n-api-stack-queue.node')
+const addon = require('bindings')('n-api-stack-queue')
 
-console.log(modBind, modNode);
-
-console.log(modBind.hello());
+console.log(addon);
+console.log(addon.hello());
+console.log(addon.multiply(+'8', 5));
