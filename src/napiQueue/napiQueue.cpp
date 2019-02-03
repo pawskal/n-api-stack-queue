@@ -35,37 +35,21 @@ Napi::Value NapiQueue::enqueue(const Napi::CallbackInfo& info) {
    Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
 
-  int arg = info[0].As<Napi::Number>().Int32Value();
-  cout<<arg<<" ref obj `"<<endl;
+  Napi::Object arg = info[0].As<Napi::Object>();
+  Napi::ObjectReference ref = Napi::ObjectReference::New(arg);
 
-  // Napi::ObjectReference obj = Napi::ObjectReference::New(arg.ToObject(), 1);
-  // this->arr[0] = info[0];
-  // Napi::ObjectReference* ptro = &obj;
-
-  // Napi::ObjectReference** pptro = &ptro;
-  // std::cout<<(std::string)obj.Get("a").ToString()<<endl;
+  Napi::Array keys = arg.GetPropertyNames();
   
-  // this->_queue->enqueue(Napi::ObjectReference::New(info[0].As<Napi::Object>()));  
-  this->_queueInt->enqueue(arg); 
-  // this->_queue->enqueue(Napi::Object::New(env)); 
-  // Napi::Value obj1 = this->_queue->dequeue();
+  // cout<<Napi::Value(keys['0']).As<Napi::String>().ToString()<<" ref obj `"<<endl;
+ 
+  this->_queueInt->enqueue(1); 
 
-  // this->_queue->enqueue(arg); 
-  // this->_queue->enqueue(arg); 
-  // this->_queue->enqueue(obj.Value().ToObject());  
-  // this->_queue->enqueue(info[0].As<Napi::Object>());  
-  // this->_queue->enqueue(info[0].As<Napi::Object>());  
+  Napi::Value s = keys.Get((uint32_t)0);
+  string str = s.As<Napi::String>().Utf8Value();
+  cout<<arg.Get(str).As<Napi::String>().Utf8Value()<<" ref obj `"<<endl;
 
-  // std::cout<<this->_queue->size<<endl;
 
-  // return Napi::Value(env, obj1);
-  // return Napi::Value(env, obj.Value());
-  // Napi::Object obj1 = this->_queue->dequeue();
-  // Napi::ObjectReference ref = Napi::ObjectReference::New(obj1);
-  // std::cout<<(std::string)obj.Get("a").ToString()<<endl;
-  // cout<<ref.Value()<<endl;
-
-  return info[0];
+  return Napi::Value::From(env, s);
 }
 
 void foo (Napi::Object b) {
@@ -98,5 +82,5 @@ Napi::Value NapiQueue::dequeue(const Napi::CallbackInfo& info) {
 
   // sleep(2000)
 
-  return Napi::Number::New(info.Env(), obj1);
+  return Napi::Number::From(info.Env(), obj1);
 }

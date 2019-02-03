@@ -9,12 +9,12 @@ const { NapiQueue } = addon;
 const queue = new NapiQueue();
 console.dir(queue)
 
-console.log(queue.enqueue(34234234234),
-// queue.enqueue({ a: "test2" }),
+console.log(queue.enqueue({ a: "test2" }),
+queue.enqueue({ a: "test1" }),
 // queue.enqueue({ a: "test3" })
 )
 const rc = queue.dequeue()
-// const rb = queue.dequeue()
+const rb = queue.dequeue()
 // const ra = queue.dequeue()
 
 console.log(rc
