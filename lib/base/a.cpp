@@ -9,7 +9,7 @@ const int SIZE = 0;
 template <class T>
 Base<T>::Base(int size) {
   this->size = SIZE;
-  this->array = new T[SIZE];
+  this->array = new T*[SIZE];
 }
 
 template <class T>
@@ -18,7 +18,7 @@ void Base<T>::print() {
   cout<<str<<endl;
   for(int i = 0; i<this->size; i++) {
     // cout << this->array[i] <<endl;
-    this->array[i].display(true);
+    this->array[i]->display(true);
   }
 }
 
@@ -32,12 +32,12 @@ void Base<T>::fill() {
 template <class T>
 void Base<T>::resize(int newSize) {
   int offset = newSize - this->size;
-  cout<<newSize<<" newSize"<<endl;
+  cout<<newSize<<" newSize "<<newSize*sizeof(T*)<<endl;
   cout<<offset<<" offset"<<endl;
   if (offset > 0) {
-    memcpy(this->array, this->array, newSize*sizeof(T)); 
+    memcpy(this->array, this->array, newSize*sizeof(T*)); 
   } else {
-    memcpy(this->array, this->array + 1, newSize*sizeof(T)); 
+    memcpy(this->array, this->array + 1, newSize*sizeof(T*)); 
   }
   this->size = this->size + offset;
 }

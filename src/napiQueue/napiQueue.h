@@ -1,6 +1,8 @@
 #include <napi.h>
 #include "../../lib/base/queue/queue.cpp"
 
+
+
 class NapiQueue: public Napi::ObjectWrap<NapiQueue> {
   public:
     static Napi::Object Init(Napi::Env env, Napi::Object exports);
@@ -13,4 +15,5 @@ class NapiQueue: public Napi::ObjectWrap<NapiQueue> {
     Napi::Value *arr;
     Queue<Napi::Value>* _queue;
     Queue<int>* _queueInt;
+    Queue<KeyValue>* _objects;
 };

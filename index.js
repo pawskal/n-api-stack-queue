@@ -9,15 +9,24 @@ const { NapiQueue } = addon;
 const queue = new NapiQueue();
 console.dir(queue)
 
-console.log(queue.enqueue({ a: "test2" }),
-queue.enqueue({ a: "test1" }),
-// queue.enqueue({ a: "test3" })
+console.log(queue.enqueue({ superKeyVal: "SuperValueKey"} ),
 )
-const rc = queue.dequeue()
-const rb = queue.dequeue()
-// const ra = queue.dequeue()
 
-console.log(rc
-  // , rb
-  // , ra
-  )
+
+console.log(queue.enqueue({ a: "test1" }))
+queue.enqueue({ ad: "test3" })
+
+
+
+
+  setTimeout(() => {
+    const rc = queue.dequeue()
+    const rb = queue.dequeue()
+    const ra = queue.dequeue()
+
+    console.log(rc
+      , rb
+      , ra
+      )
+    console.log('FINISH')
+  }, 500);

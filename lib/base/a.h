@@ -2,10 +2,11 @@ template <class T>
 class Base {
   public: 
     int size;
-    T* array;
+    T** array;
     void fill();
     void print();
   protected: 
     Base(int);
+    ~Base();
     void resize(int);
 };

@@ -29,27 +29,37 @@ NapiQueue::NapiQueue(const Napi::CallbackInfo& info): Napi::ObjectWrap<NapiQueue
 
   this->_queue = new Queue<Napi::Value>();
   this->_queueInt = new Queue<int>();
+  this->_objects = new Queue<KeyValue>();
+
 };
 
 Napi::Value NapiQueue::enqueue(const Napi::CallbackInfo& info) {
-   Napi::Env env = info.Env();
-  Napi::HandleScope scope(env);
+  // Napi::Env env = Napi::Env();
+  // Napi::HandleScope scope(env);
 
   Napi::Object arg = info[0].As<Napi::Object>();
-  Napi::ObjectReference ref = Napi::ObjectReference::New(arg);
 
   Napi::Array keys = arg.GetPropertyNames();
   
-  // cout<<Napi::Value(keys['0']).As<Napi::String>().ToString()<<" ref obj `"<<endl;
- 
-  this->_queueInt->enqueue(1); 
+  // int n = 356;
+  // int* a = &n;
+  
+  // cout<<a<<": ptra"<<endl;
+  // cout<<*a<<": value ptra"<<endl;
+
+  // this->_queueInt->enqueue(a); 
 
   Napi::Value s = keys.Get((uint32_t)0);
   string str = s.As<Napi::String>().Utf8Value();
-  cout<<arg.Get(str).As<Napi::String>().Utf8Value()<<" ref obj `"<<endl;
+  string value = arg.Get(str).As<Napi::String>().Utf8Value();
+  cout<<value<<" ref obj `"<<endl;
+  KeyValue* pair = new KeyValue(str, value);
+  cout<<"Pait: -> "<<pair<<endl;
+  cout<<pair->key<<" <- Key "<<pair->value<<" <- Value"<<endl;
+  this->_objects->enqueue(pair);
 
 
-  return Napi::Value::From(env, s);
+  return Napi::Value::From(info.Env(), s);
 }
 
 void foo (Napi::Object b) {
@@ -61,18 +71,20 @@ void foo (Napi::Object b) {
 Napi::Value NapiQueue::dequeue(const Napi::CallbackInfo& info) {
   // Napi::Env env = info.Env();
   // Napi::HandleScope scope(env);
+  cout<<"DEQUEUEING NODE!!!!!!!!"<<endl;
 
-  int obj1 = this->_queueInt->dequeue();
-  cout<<obj1<<" OBJ 1 "<<endl;
-  // Napi::ObjectReference ob = Napi::ObjectReference::New(obj1.ToObject());
-  // cout<<ob.Value()<<" ref obj `"<<endl;
-  // Napi::Object* obj2 = &obj1;
-  // foo(*obj2);
-  // Napi::ObjectReference ref = Napi::ObjectReference::New(obj1, 1);
-  // ref.SuppressDestruct();
-  // std::cout<<(std::string)ref.Get("a").ToString()<<endl;
+  KeyValue* obj = this->_objects->dequeue();
 
-  // Napi::Value* val = Napi::ObjectWrap<Napi::Object>::Unwrap(obj1);
+  cout<<obj->key<<" <- Key "<<obj->value<<" <- Value"<<endl;
+
+  cout<<obj<<endl;
+
+  Napi::Object val = Napi::Object::New(info.Env());
+  val.Set(obj->key, obj->value);
+  // val.Set(obj2->key, obj2->value);
+
+  // Napi::ObjectReference ref = Napi::ObjectReference::New(val);
+  // ref.Set()
 
 
   // cout<<ref.Value()<<endl;
@@ -82,5 +94,5 @@ Napi::Value NapiQueue::dequeue(const Napi::CallbackInfo& info) {
 
   // sleep(2000)
 
-  return Napi::Number::From(info.Env(), obj1);
+  return Napi::Value(info.Env(), val).ToObject();
 }
