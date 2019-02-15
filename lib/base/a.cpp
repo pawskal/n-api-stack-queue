@@ -6,13 +6,13 @@ using namespace std;
 
 const int SIZE = 0;
 
-template <class T>
+template <typename T>
 Base<T>::Base(int size) {
   this->size = SIZE;
   this->array = new T*[SIZE];
 }
 
-template <class T>
+template <typename T>
 void Base<T>::print() {
   string str = this->size == 0 ? "empty" : "not emply";
   cout<<str<<endl;
@@ -22,14 +22,14 @@ void Base<T>::print() {
   }
 }
 
-template <class T>
+template <typename T>
 void Base<T>::fill() {
   for(int i = 0; i<this->size; i++) {
     this->array[i] = i;
   }
 }
 
-template <class T>
+template <typename T>
 void Base<T>::resize(int newSize) {
   int offset = newSize - this->size;
   cout<<newSize<<" newSize "<<newSize*sizeof(T*)<<endl;

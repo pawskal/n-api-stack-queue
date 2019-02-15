@@ -22,7 +22,7 @@ KeyValue::~KeyValue()
 }
 
 
-template <class T>
+template <typename T>
 class Queue : public Base<T> {
   public:
     Queue():Base<T>(0){};

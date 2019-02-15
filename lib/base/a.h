@@ -1,4 +1,4 @@
-template <class T>
+template <typename T>
 class Base {
   public: 
     int size;

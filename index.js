@@ -7,16 +7,20 @@ console.log(addon.multiply(+'8', 5));
 const { NapiQueue } = addon;
 
 const queue = new NapiQueue();
-console.dir(queue)
 
-console.log(queue.enqueue({ superKeyVal: "SuperValueKey"} ),
+console.log(queue.enqueue({ superKeyVal: "SuperValueKey"}),
 )
 
 
 console.log(queue.enqueue({ a: "test1" }))
 queue.enqueue({ ad: "test3" })
 
+const buffer = Buffer.from("ABC");
 
+// synchronous, rotates each character by +13
+// addon.rotate(buffer, buffer.length, 13);
+
+// console.log(buffer.toString('ascii'));
 
 
   setTimeout(() => {

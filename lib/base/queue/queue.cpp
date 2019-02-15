@@ -6,7 +6,7 @@ using namespace std;
 // template <class T>
 // Queue<T>::Queue(int size):Base(size);
 
-template <class T>
+template <typename T>
 void Queue<T>::enqueue(T* obj) {
   cout<<this->size<<" old size"<<endl;
   cout<<obj<<" ENQ REF"<<endl;
@@ -14,7 +14,7 @@ void Queue<T>::enqueue(T* obj) {
   this->array[this->size -1] = obj;
 }
 
-template <class T>
+template <typename T>
 T* Queue<T>::dequeue() {
   T* obj = *this->array;
   cout<<this->size<<" old size"<<endl;
